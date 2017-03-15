@@ -91,6 +91,8 @@ COPY  . /marathon-lb
 WORKDIR /marathon-lb
 
 ENTRYPOINT [ "tini", "-g", "--", "/marathon-lb/run" ]
-CMD [ "sse", "--health-check", "--group", "external" ]
+CMD [ "sse", "--health-check", "--group", "external","--auth-credentials",
+	"$MARATHON_USER:$MARATHON_PASSWORD"
+]
 
 EXPOSE 80 443 9090 9091
