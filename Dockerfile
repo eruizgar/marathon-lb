@@ -14,6 +14,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	curl \
     && rm -rf /var/lib/apt/lists/*
 
+RUN curl -fLsS -o /usr/local/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && chmod +x /usr/local/bin/jq
+
+
 ENV TINI_VERSION=v0.13.2 \
     TINI_GPG_KEY=595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7
 RUN set -x \
