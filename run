@@ -1,6 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 
+#Security of stratio
+VAULT_TOKEN=$VAULT_TOKEN
+VAULT_HOST=$VAULT_HOST     
+VAULT_PORT=$VAULT_PORT
+
+export MARATHON_USER=$(curl -k -L -H "X-Vault-Token:$VAULT_TOKEN"  "https://$VAULT_HOST:$VAULT_PORT/v1/dcs/passwords/marathon/rest" -s | jq -r ".data .\"user\"")
+export MARATHON_PASSWORD=$(curl -k -L -H "X-Vault-Token:$VAULT_TOKEN"  "https://$VAULT_HOST:$VAULT_PORT/v1/dcs/passwords/marathon/rest" -s | jq -r ".data .\"pass\"")
+
+
 SYSLOG_SOCKET=${SYSLOG_SOCKET:-/dev/null}
 
 LB_SERVICE="/marathon-lb/service/lb"
