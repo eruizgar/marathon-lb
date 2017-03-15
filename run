@@ -111,6 +111,7 @@ exec /marathon-lb/marathon_lb.py \
     --haproxy-config /marathon-lb/haproxy.cfg \
     --ssl-certs "${SSL_CERTS}" \
     --command "sv reload ${HAPROXY_SERVICE}" \
+    --auth-credentials "$MARATHON_USER:$MARATHON_PASSWORD" \
     $ARGS
 EOF
 chmod 755 $LB_SERVICE/run
